@@ -26,9 +26,8 @@ const buildIngredientArray = (drink) => {
 module.exports = {
   // Search cocktail by name
   searchByName: async (name) => {
-    const drink = await fetch(`http://www.thecocktaildb.com/api/json/v1/1/search.php?s=${name}`)
-    console.log(drink.json())
-    return drink
+    const response = await fetch(`http://www.thecocktaildb.com/api/json/v1/1/search.php?s=${name}`)
+    return await response.json()
   },
   // Search by ingredient
   searchByIngredient: (ingredient) => {
