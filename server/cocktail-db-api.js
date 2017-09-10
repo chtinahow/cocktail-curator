@@ -30,8 +30,10 @@ module.exports = {
     return await response.json()
   },
   // Search by ingredient
-  searchByIngredient: (ingredient) => {
-    // http://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Gin
+  searchByIngredient: async (ingredient) => {
+    const response = await fetch(`http://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`)
+    const drinkJSON = await response.json()
+    return drinkJSON.drinks
   },
   // Get all ingredients
   getAllIngredients: () => {
