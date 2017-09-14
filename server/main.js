@@ -13,25 +13,33 @@ app.get('/', async (req, res) => {
 app.post('/filter', async (req, res) => {
   const ingredients = req.body
 
-  let drinkArrays = []
+  let drinkLists = []
   for(ingredientIndex in ingredients) {
     const fetchedDrinks = await cocktailAPI.searchByIngredient(ingredients[ingredientIndex])
-    drinkArrays.push(fetchedDrinks)
+    drinkLists.push(fetchedDrinks)
   }
 
-  const doesListHaveDrink = (drinkList, drink) => {
-    return drinkList
-      .map(listDrink => listDrink.idDrink)
-      .includes(drink.idDrink)
+  const hashWithNewDrinkAndIng = (drinkHash, drink, ingredient) => {
+    if(drinkHash[drink.idDrink]) {
+      const newIngredients = drinkHash[drink.idDrink].ingredients.concat(ingredient)
+      const newDrink = Object.assign({}, drink, {ingredients: newIngredients})
+      return Object.assign({}, drinkHash, {[drink.idDrink]: newDrink})
+    }
+    const drinkWithIngredients = Object.assign({}, drink, {ingredients: [ingredient]})
+    return Object.assign({}, drinkHash, {[drink.idDrink]: drinkWithIngredients})
   }
 
-  const finalDrinks = drinkArrays[0].filter(drink => {
-    return drinkArrays
-      .slice(1)
-      .map(drinkList => doesListHaveDrink(drinkList, drink))
-      .every(listHasDrink => listHasDrink)
-  })
-  res.send(finalDrinks)
+  const finalDrinks = drinkLists.reduce((drinks, drinkList, ingredientIndex) => {
+    return drinkList.reduce((drinkHash, drink) => {
+      const allDrinks = Object.assign({}, drinks, drinkHash)
+      return hashWithNewDrinkAndIng(allDrinks, drink, ingredients[ingredientIndex])
+    }, {})
+  }, {})
+
+  const finalDrinkList = Object.keys(finalDrinks).map(idDrink => finalDrinks[idDrink])
+  finalDrinkList.sort((drink1, drink2) => drink2.ingredients.length - drink1.ingredients.length)
+
+  res.send(finalDrinkList)
 })
 
 app.listen(3000, function () {
