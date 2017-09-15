@@ -35,7 +35,8 @@ module.exports = {
     return finalDrinkList
   },
 
-  getDrinksByName: (drinkName) => {
-
+  getDrinksByName: async (drinkName) => {
+    const fetchedDrinks = await cocktailAPI.searchByName(drinkName)
+    return fetchedDrinks
   }
 }

@@ -15,6 +15,12 @@ app.post('/filter', async (req, res) => {
   res.send(filteredDrinks)
 })
 
+app.get('/search/:name', async (req,res) => {
+  const drinks = req.params.name
+  const filteredDrinks = await api.getDrinksByName(drinks)
+  res.send(filteredDrinks)
+})
+
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!')
 })
