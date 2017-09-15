@@ -10,6 +10,14 @@ const transformDrinkJSON = (drink) => {
   }
 }
 
+const transformFilterDrinkJSON = (drink) => {
+  return {
+    id: drink.idDrink,
+    name: drink.strDrink,
+    image: drink.strDrinkThumb
+  }
+}
+
 const buildIngredientArray = (drink) => {
   return Object.keys(drink)
     .filter(key => key.match(/\strIngredient\d+/))
@@ -33,7 +41,8 @@ module.exports = {
   searchByIngredient: async (ingredient) => {
     const response = await fetch(`http://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`)
     const drinkJSON = await response.json()
-    return drinkJSON.drinks
+    const parsedDrinks = drinkJSON.drinks.map(drink => transformFilterDrinkJSON(drink))
+    return parsedDrinks
   },
   // Get all ingredients
   getAllIngredients: () => {
