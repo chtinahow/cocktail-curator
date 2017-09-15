@@ -21,6 +21,12 @@ app.get('/search/:name', async (req,res) => {
   res.send(filteredDrinks)
 })
 
+app.get('/drink/:id', async (req,res) => {
+  const drinks = req.params.id
+  const filteredDrinks = await api.getDrinkById(drinks)
+  res.send(filteredDrinks)
+})
+
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!')
 })

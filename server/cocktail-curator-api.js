@@ -1,9 +1,6 @@
 const cocktailAPI = require('./cocktail-db-api')
 
 module.exports = {
-  getDrinkById: (drinkId) => {
-
-  },
 
   filterDrinksByIngredients: async (ingredients) => {
     let drinkLists = []
@@ -37,6 +34,11 @@ module.exports = {
 
   getDrinksByName: async (drinkName) => {
     const fetchedDrinks = await cocktailAPI.searchByName(drinkName)
+    return fetchedDrinks
+  },
+
+  getDrinkById: async (drinkId) => {
+    const fetchedDrinks = await cocktailAPI.searchByDrinkId(drinkId)
     return fetchedDrinks
   }
 }
