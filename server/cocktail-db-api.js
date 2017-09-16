@@ -47,22 +47,23 @@ module.exports = {
     return parsedDrinks
   },
   // Get drink by id
-  searchByDrinkId: async (id) => {
+  getByDrinkId: async (id) => {
     const response = await fetch(`http://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`)
     const drinkJSON = await response.json()
     const parsedDrinks = drinkJSON.drinks.map(drink => transformDrinkJSON(drink))
-    return parsedDrinks
+    return parsedDrinks[0]
   },
   // Get all ingredients
-  getAllIngredients: () => {
-    // http://www.thecocktaildb.com/api/json/v1/1/list.php?i=list
-  },
-  // Lookup full cocktail details by id
-  getCocktailById: (id) => {
-    // http://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=13060
+  getAllIngredients: async () => {
+    const response = await fetch('http://www.thecocktaildb.com/api/json/v1/1/list.php?i=list')
+    return response
   },
   // Lookup a random cocktail
-  getRandomCocktail: () => {
+  getRandomCocktail: async () => {
+    const response = await fetch('http://www.thecocktaildb.com/api/json/v1/1/random.php')
+    const drinkJSON = await response.json()
+    const parsedDrinks = drinkJSON.drinks.map(drink => transformDrinkJSON(drink))
+    return parsedDrinks[0]
     // http://www.thecocktaildb.com/api/json/v1/1/random.php
   }
 }

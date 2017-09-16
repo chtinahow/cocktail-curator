@@ -38,7 +38,7 @@ module.exports = {
   },
 
   getDrinkById: async (drinkId) => {
-    const fetchedDrinks = await cocktailAPI.searchByDrinkId(drinkId)
+    const fetchedDrinks = await cocktailAPI.getByDrinkId(drinkId)
     return fetchedDrinks
   }
 }
