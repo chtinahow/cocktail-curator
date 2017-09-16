@@ -3,14 +3,11 @@ const cocktailAPI = require('./cocktail-db-api')
 module.exports = {
 
   filterDrinksByIngredients: async (ingredients) => {
-    let drinkLists = []
-    for(ingredientIndex in ingredients) {
-      const fetchedDrinks = await cocktailAPI.searchByIngredient(ingredients[ingredientIndex])
-      drinkLists.push(fetchedDrinks)
-    }
+    const drinkResults = ingredients.map(ingredient => cocktailAPI.searchByIngredient(ingredient))
+    const drinkLists = await Promise.all(drinkResults)
 
     const hashWithNewDrinkAndIng = (drinkHash, drink, ingredient) => {
-      if(drinkHash[drink.id]) {
+      if (drinkHash[drink.id]) {
         const newIngredients = drinkHash[drink.id].ingredients.concat({name: ingredient})
         const newDrink = Object.assign({}, drink, {ingredients: newIngredients})
         return Object.assign({}, drinkHash, {[drink.id]: newDrink})

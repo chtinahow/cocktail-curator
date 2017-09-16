@@ -1,5 +1,18 @@
 const fetch = require('node-fetch')
 
+const buildIngredientArray = (drink) => {
+  return Object.keys(drink)
+    .filter(key => key.match(/strIngredient\d+/))
+    .filter(ingredientKey => drink[ingredientKey] !== '')
+    .map(ingredientKey => ingredientKey.replace('strIngredient', ''))
+    .map((ingredientIndex) => {
+      return {
+        name: drink[`strIngredient${ingredientIndex}`],
+        measure: drink[`strMeasure${ingredientIndex}`]
+      }
+    })
+}
+
 const transformDrinkJSON = (drink) => {
   return {
     id: drink.idDrink,
@@ -16,19 +29,6 @@ const transformFilterDrinkJSON = (drink) => {
     name: drink.strDrink,
     image: drink.strDrinkThumb
   }
-}
-
-const buildIngredientArray = (drink) => {
-  return Object.keys(drink)
-    .filter(key => key.match(/strIngredient\d+/))
-    .filter(ingredientKey => drink[ingredientKey] !== '')
-    .map(ingredientKey => ingredientKey.replace('strIngredient', ''))
-    .map(ingredientIndex => {
-      return {
-        name: drink[`strIngredient${ingredientIndex}`],
-        measure: drink[`strMeasure${ingredientIndex}`]
-      }
-    })
 }
 
 module.exports = {
