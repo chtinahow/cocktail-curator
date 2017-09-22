@@ -1,4 +1,5 @@
 const fetch = require('node-fetch')
+const cocktailKey = '5210'
 
 const buildIngredientArray = (drink) => {
   return Object.keys(drink)
@@ -34,36 +35,37 @@ const transformFilterDrinkJSON = (drink) => {
 module.exports = {
   // Search cocktail by name
   searchByName: async (name) => {
-    const response = await fetch(`http://www.thecocktaildb.com/api/json/v1/1/search.php?s=${name}`)
+    const response = await fetch(`http://www.thecocktaildb.com/api/json/v1/${cocktailKey}/search.php?s=${name}`)
     const drinkJSON = await response.json()
     const parsedDrinks = drinkJSON.drinks.map(drink => transformDrinkJSON(drink))
     return parsedDrinks
   },
   // Search by ingredient
   searchByIngredient: async (ingredient) => {
-    const response = await fetch(`http://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`)
+    const response = await fetch(`http://www.thecocktaildb.com/api/json/v1/${cocktailKey}/filter.php?i=${ingredient}`)
     const drinkJSON = await response.json()
     const parsedDrinks = drinkJSON.drinks.map(drink => transformFilterDrinkJSON(drink))
     return parsedDrinks
   },
   // Get drink by id
   getByDrinkId: async (id) => {
-    const response = await fetch(`http://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`)
+    const response = await fetch(`http://www.thecocktaildb.com/api/json/v1/${cocktailKey}/lookup.php?i=${id}`)
     const drinkJSON = await response.json()
     const parsedDrinks = drinkJSON.drinks.map(drink => transformDrinkJSON(drink))
     return parsedDrinks[0]
   },
   // Get all ingredients
   getAllIngredients: async () => {
-    const response = await fetch('http://www.thecocktaildb.com/api/json/v1/1/list.php?i=list')
-    return response
+    const response = await fetch(`http://www.thecocktaildb.com/api/json/v1/${cocktailKey}/list.php?i=list`)
+    const drinkJSON = await response.json()
+    return drinkJSON
   },
   // Lookup a random cocktail
-  getRandomCocktail: async () => {
-    const response = await fetch('http://www.thecocktaildb.com/api/json/v1/1/random.php')
+  getRandomDrink: async () => {
+    const response = await fetch(`http://www.thecocktaildb.com/api/json/v1/${cocktailKey}/random.php`)
     const drinkJSON = await response.json()
     const parsedDrinks = drinkJSON.drinks.map(drink => transformDrinkJSON(drink))
     return parsedDrinks[0]
-    // http://www.thecocktaildb.com/api/json/v1/1/random.php
+    // http://www.thecocktaildb.com/api/json/v1/${cocktailKey}/random.php
   }
 }

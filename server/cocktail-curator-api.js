@@ -1,9 +1,20 @@
 const cocktailAPI = require('./cocktail-db-api')
+const ingredientMapping = require('./ingredientMapping')
+const urlencode = require('urlencode')
+
+const expandIngredients = (reducedIngredients) => {
+  return reducedIngredients.reduce((expandedIngredients, ingredient) => {
+    return expandedIngredients.concat(ingredientMapping[ingredient])
+  },[])
+}
 
 module.exports = {
 
   filterDrinksByIngredients: async (ingredients) => {
-    const drinkResults = ingredients.map(ingredient => cocktailAPI.searchByIngredient(ingredient))
+    const expandedIngredients = expandIngredients(ingredients)
+    const drinkResults = expandedIngredients
+      .map(ingredient => urlencode(ingredient))
+      .map(cocktailAPI.searchByIngredient)
     const drinkLists = await Promise.all(drinkResults)
 
     const hashWithNewDrinkAndIng = (drinkHash, drink, ingredient) => {
@@ -19,7 +30,7 @@ module.exports = {
     const finalDrinks = drinkLists.reduce((drinks, drinkList, ingredientIndex) => {
       return drinkList.reduce((drinkHash, drink) => {
         const allDrinks = Object.assign({}, drinks, drinkHash)
-        return hashWithNewDrinkAndIng(allDrinks, drink, ingredients[ingredientIndex])
+        return hashWithNewDrinkAndIng(allDrinks, drink, expandedIngredients[ingredientIndex])
       }, {})
     }, {})
 
@@ -37,5 +48,12 @@ module.exports = {
   getDrinkById: async (drinkId) => {
     const fetchedDrinks = await cocktailAPI.getByDrinkId(drinkId)
     return fetchedDrinks
-  }
+  },
+
+  getRandomDrink: async () => {
+    const fetchedDrinks = await cocktailAPI.getRandomDrink()
+    return fetchedDrinks
+  },
+
+  getReducedIngredients: () => Object.keys(ingredientMapping)
 }
