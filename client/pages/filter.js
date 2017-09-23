@@ -12,11 +12,11 @@ const getOrFetchDrinkDOM = (store, actions, params) => {
     case 'LOADING':
       return 'loading...'
     case 'LOADED':
-      if(store.filterStore.ingredients !== params.ingredients) {
+      if (store.filterStore.ingredients !== params.ingredients) {
         actions.fetchDrinksByIngredients(params.ingredients)
         return 'fetching...'
       }
-      return store.filterStore.drinks.map(drink => {
+      return store.filterStore.drinks.map((drink) => {
         return html`
           <drink-preview
             id=${drink.id}
@@ -27,6 +27,8 @@ const getOrFetchDrinkDOM = (store, actions, params) => {
           </drink-preview>
         `
       })
+    default:
+      return 'Error ...'
   }
 }
 

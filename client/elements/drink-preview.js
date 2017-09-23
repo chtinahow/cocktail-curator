@@ -1,6 +1,19 @@
 const Tram = require('tram-one')
 const html = Tram.html()
 
+const imageStyle = `
+  width: 10em;
+`
+
+const hoverStyle = html`
+  <style>
+    .drink-preview:hover {
+      background: #ff9400;
+      cursor: pointer;
+    }
+  </style>
+`
+
 module.exports = (attrs) => {
   const ingredientsDOM = attrs.ingredients
     .map(ingredient => ingredient.name)
@@ -11,14 +24,16 @@ module.exports = (attrs) => {
   }
 
   return html`
-    <div>
-      <button onclick=${onClickDrink}>${attrs.name}</button>
-      <img src=${attrs.image}/>
-      <h3>
-        ${attrs.name}
-      </h3>
-      <div>
-        includes: ${ingredientsDOM}, ...
+    <div onclick=${onClickDrink}>
+      ${hoverStyle}
+      <div class="drink-preview">
+        <img src=${attrs.image} style=${imageStyle} />
+        <h3>
+          ${attrs.name}
+        </h3>
+        <div>
+          includes: ${ingredientsDOM}, ...
+        </div>
       </div>
     </div>
   `

@@ -12,7 +12,7 @@ const getOrFetchDrinkDOM = (store, actions, params) => {
     case 'LOADING':
       return 'loading...'
     case 'LOADED':
-      if(store.drinkStore.drink.id !== params.drinkId) {
+      if (store.drinkStore.drink.id !== params.drinkId) {
         actions.fetchDrinkById(params.drinkId)
         return 'fetching...'
       }
@@ -24,6 +24,8 @@ const getOrFetchDrinkDOM = (store, actions, params) => {
           instructions=${store.drinkStore.drink.instructions}>
         </drink>
       `
+    default:
+      return 'Error...'
   }
 }
 

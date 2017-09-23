@@ -1,14 +1,14 @@
-const cocktailAPI = require('./cocktail-db-api')
-const ingredientMapping = require('./ingredientMapping')
 const urlencode = require('urlencode')
+const cocktailAPI = require('./cocktail-db-api')
+const ingredientMapping = require('./ingredient-mapping')
 
 const expandIngredients = (reducedIngredients) => {
   return reducedIngredients.reduce((expandedIngredients, ingredient) => {
-    if(ingredientMapping[ingredient]) {
+    if (ingredientMapping[ingredient]) {
       return expandedIngredients.concat(ingredientMapping[ingredient])
     }
     return expandedIngredients
-  },[])
+  }, [])
 }
 
 module.exports = {

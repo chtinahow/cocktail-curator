@@ -1,10 +1,8 @@
 const express = require('express')
-// const bodyParser = require('body-parser')
-const api = require('./cocktail-curator-api')
 const cors = require('cors')
+const api = require('./cocktail-curator-api')
 
 const app = express()
-// app.use(bodyParser.json())
 app.use(cors())
 
 app.get('/', async (req, res) => {
@@ -12,7 +10,7 @@ app.get('/', async (req, res) => {
 })
 
 app.get('/filter', async (req, res) => {
-  if(req.query.ingredients === undefined) {
+  if (req.query.ingredients === undefined) {
     res.status(400).send('¡No ingredientes!')
     return
   }
