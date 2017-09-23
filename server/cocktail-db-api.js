@@ -5,6 +5,7 @@ const buildIngredientArray = (drink) => {
   return Object.keys(drink)
     .filter(key => key.match(/strIngredient\d+/))
     .filter(ingredientKey => drink[ingredientKey] !== '')
+    .filter(ingredientKey => drink[ingredientKey] !== null)
     .map(ingredientKey => ingredientKey.replace('strIngredient', ''))
     .map((ingredientIndex) => {
       return {

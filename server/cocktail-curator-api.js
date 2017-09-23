@@ -4,7 +4,10 @@ const urlencode = require('urlencode')
 
 const expandIngredients = (reducedIngredients) => {
   return reducedIngredients.reduce((expandedIngredients, ingredient) => {
-    return expandedIngredients.concat(ingredientMapping[ingredient])
+    if(ingredientMapping[ingredient]) {
+      return expandedIngredients.concat(ingredientMapping[ingredient])
+    }
+    return expandedIngredients
   },[])
 }
 

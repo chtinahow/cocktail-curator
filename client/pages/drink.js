@@ -12,6 +12,10 @@ const getOrFetchDrinkDOM = (store, actions, params) => {
     case 'LOADING':
       return 'loading...'
     case 'LOADED':
+      if(store.drinkStore.drink.id !== params.drinkId) {
+        actions.fetchDrinkById(params.drinkId)
+        return 'fetching...'
+      }
       return html`
         <drink
           image=${store.drinkStore.drink.image}
@@ -29,10 +33,6 @@ module.exports = (store, actions, params) => {
     <div>
       <header></header>
       ${drinkDOM}
-      <div>
-        Thank you for using Tram-One!<br>
-        To get started, edit <code>client/pages/home.js</code>.
-      </div>
     </div>
   `
 }
