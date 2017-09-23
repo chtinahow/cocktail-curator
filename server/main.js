@@ -1,9 +1,11 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const api = require('./cocktail-curator-api')
+const cors = require('cors')
 
 const app = express()
 app.use(bodyParser.json())
+app.use(cors())
 
 app.get('/', async (req, res) => {
   res.send('Cocktail API')
