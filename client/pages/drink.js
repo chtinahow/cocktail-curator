@@ -4,6 +4,10 @@ const html = Tram.html({
   drink: require('../elements/drink')
 })
 
+const bodyStyle = `
+  padding: 0.8rem;
+`
+
 const getOrFetchDrinkDOM = (store, actions, params) => {
   switch (store.drinkStore.status) {
     case 'NOT_LOADED':
@@ -34,7 +38,9 @@ module.exports = (store, actions, params) => {
   return html`
     <div>
       <header></header>
-      ${drinkDOM}
+      <div style=${bodyStyle}>
+        ${drinkDOM}
+      </div>
     </div>
   `
 }
