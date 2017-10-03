@@ -10,6 +10,7 @@ const headerStyle = `
 const imageStyle = `
   width: 1em;
   margin-bottom: -0.2rem;
+  filter: contrast(0%) brightness(180%);
 `
 
 module.exports = () => {

@@ -15,6 +15,7 @@
     "babelify": "^7.3.0",
     "browserify": "^14.4.0",
     "budo": "^10.0.4",
+    "combobox": "^1.0.1",
     "jasmine": "^2.8.0",
     "tram-one": "^2.0.0"
   }
