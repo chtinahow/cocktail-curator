@@ -8,7 +8,7 @@ const imageStyle = `
 
 const ingredientsStyle = `
   grid-area: ingredients;
-  text-align: center;
+  margin: auto;
 `
 
 const titleStyle = `
@@ -28,7 +28,7 @@ const gridStyle = `
   grid-template-areas:
     "image title"
     "image ingredients"
-    "description description";
+    "instructions instructions";
 `
 
 module.exports = (attrs) => {
@@ -38,15 +38,15 @@ module.exports = (attrs) => {
     `
   })
   return html`
-    <div>
-      <img src=${attrs.image}/>
-      <h3>
+    <div style=${gridStyle}>
+      <img src=${attrs.image} style=${imageStyle}/>
+      <h3 style=${titleStyle}>
         ${attrs.name}
       </h3>
-      <ul>
+      <ul style=${ingredientsStyle}>
         ${ingredientsDOM}
       </ul>
-      <div>
+      <div style=${instructionsStyle}>
         ${attrs.instructions}
       </div>
     </div>

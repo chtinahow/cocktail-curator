@@ -1,35 +1,50 @@
 const Tram = require('tram-one')
 const html = Tram.html()
 
-const imageStyle = `
-  grid-area: image;
+// const imageStyle = `
+//   width: 100%;
+// `
+
+const textStyle = `
+  text-align: center;
+  color: white;
+  position: relative;
+  z-index: 1;
+`
+
+const infoStyle = `
+  position: absolute;
+  bottom: 0;
+  left: 0;
   width: 100%;
+  padding: 20px 10px;
+  background: inherit;
+  background-attachment: fixed;
+  overflow: hidden;
 `
 
-const ingredientsStyle = `
-  grid-area: ingredients;
-  text-align: center;
-`
-
-const titleStyle = `
-  grid-area: title;
-  text-align: center;
-`
-
-const gridStyle = `
-  display: grid;
-  grid-template-columns: 25% 75%;
-  grid-template-rows: 1fr 1fr;
-  grid-template-areas:
-    "image title"
-    "image ingredients";
-`
-
-const hoverStyle = html`
+const blurStyle = html`
   <style>
-    .drink-preview:hover {
-      background: #ff9400;
-      cursor: pointer;
+    .drink-preview-text::before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: inherit;
+      background-attachment: fixed;
+      -webkit-filter: blur(4px);
+      filter: blur(4px)
+    }
+    .drink-preview-text::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.25)
     }
   </style>
 `
@@ -43,16 +58,27 @@ module.exports = (attrs) => {
     window.history.pushState({}, '', `/drink/${attrs.id}`)
   }
 
+  const drinkPreviewStyle = `
+    background: url(${attrs.image});
+    background-attachment: fixed;
+    width: 600px;
+    height: 400px;
+    position: relative;
+    overflow: hidden;
+    margin: 20px;
+  `
+
   return html`
     <div onclick=${onClickDrink}>
-      ${hoverStyle}
-      <div class="drink-preview" style=${gridStyle}>
-        <img src=${attrs.image} style=${imageStyle} />
-        <h3 style=${titleStyle}>
-          ${attrs.name}
-        </h3>
-        <div style=${ingredientsStyle}>
-          includes: ${ingredientsDOM}, ...
+      ${blurStyle}
+      <div class="drink-preview" style=${drinkPreviewStyle}>
+        <div class="drink-preview-text" style=${infoStyle}>
+          <h3 style=${textStyle}>
+            ${attrs.name}
+          </h3>
+          <div style=${textStyle}>
+            includes: ${ingredientsDOM}, ...
+          </div>
         </div>
       </div>
     </div>

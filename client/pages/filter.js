@@ -6,6 +6,7 @@ const html = Tram.html({
 
 const bodyStyle = `
   padding: 0.8rem;
+  margin: auto;
 `
 
 const getOrFetchDrinkDOM = (store, actions, params) => {
