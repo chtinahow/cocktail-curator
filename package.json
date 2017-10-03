@@ -1,7 +1,7 @@
 {
   "name": "cocktail-curator",
   "version": "1.0.0",
-  "description": "",
+  "description": "Web App for TheCocktailDb",
   "main": "index.js",
   "scripts": {
     "start:server": "node server/main.js",
@@ -29,7 +29,7 @@
     "browserify": "^14.4.0",
     "budo": "^10.0.4",
     "cors": "^2.8.4",
-    "eslint": "^4.7.0",
+    "combobox": "^1.0.1",
     "express": "^4.15.4",
     "hover-engine": "^1.2.0",
     "jasmine": "^2.8.0",
