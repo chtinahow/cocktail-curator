@@ -65,7 +65,8 @@ module.exports = (attrs) => {
     height: 400px;
     position: relative;
     overflow: hidden;
-    margin: 20px;
+    margin: 20px auto;
+    background-position: center;
   `
 
   return html`
