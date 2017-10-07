@@ -14,21 +14,23 @@ const ingredientsStyle = `
 const titleStyle = `
   grid-area: title;
   text-align: center;
+  margin-top: 0px;
 `
 
 const instructionsStyle = `
   grid-area: instructions;
-  text-align: block;
+  text-align: justify;
+  align-self: end;
 `
 
 const gridStyle = `
   display: grid;
-  grid-template-columns: 25% 75%;
+  grid-template-columns: 49% 2% 49%;
   grid-template-rows: 1fr 1fr 1fr;
   grid-template-areas:
-    "image title"
-    "image ingredients"
-    "instructions instructions";
+    "image . title"
+    "image . ingredients"
+    "image . instructions";
 `
 
 module.exports = (attrs) => {
@@ -40,9 +42,9 @@ module.exports = (attrs) => {
   return html`
     <div style=${gridStyle}>
       <img src=${attrs.image} style=${imageStyle}/>
-      <h3 style=${titleStyle}>
+      <h1 style=${titleStyle}>
         ${attrs.name}
-      </h3>
+      </h1>
       <ul style=${ingredientsStyle}>
         ${ingredientsDOM}
       </ul>
