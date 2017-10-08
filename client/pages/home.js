@@ -4,11 +4,29 @@ const html = Tram.html({
   'select-ingredients': require('../elements/select-ingredients')
 })
 
-module.exports = () => {
+const getOrFetchAllIngredients = (store, actions) => {
+  switch (store.ingredientsStore.status) {
+    case 'NOT_LOADED':
+      actions.fetchAllIngredients()
+      return 'fetching...'
+    case 'LOADING':
+      return 'loading...'
+    case 'LOADED':
+      return html`
+        <select-ingredients ingredients=${store.ingredientsStore.ingredients}>
+        </select-ingredients>
+      `
+    default:
+      return 'Error...'
+  }
+}
+
+module.exports = (store, actions) => {
+  const ingredients = getOrFetchAllIngredients(store, actions)
   return html`
     <div>
       <header></header>
-      <select-ingredients></select-ingredients>
+      ${ingredients}
       <div>
         Thank you for using Tram-One!<br>
         To get started, edit <code>client/pages/home.js</code>.

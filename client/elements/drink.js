@@ -25,12 +25,15 @@ const instructionsStyle = `
 
 const gridStyle = `
   display: grid;
-  grid-template-columns: 49% 2% 49%;
+  grid-template-columns: 49% 49%;
+  grid-column-gap: 2%;
   grid-template-rows: 1fr 1fr 1fr;
   grid-template-areas:
-    "image . title"
-    "image . ingredients"
-    "image . instructions";
+    "image title"
+    "image ingredients"
+    "image instructions";
+  height: 80%;
+  overflow: hidden;
 `
 
 module.exports = (attrs) => {

@@ -1,10 +1,6 @@
 const Tram = require('tram-one')
 const html = Tram.html()
 
-// const imageStyle = `
-//   width: 100%;
-// `
-
 const textStyle = `
   text-align: center;
   color: white;
@@ -67,6 +63,7 @@ module.exports = (attrs) => {
     overflow: hidden;
     margin: 20px auto;
     background-position: center;
+    border-radius: 3rem;
   `
 
   return html`
