@@ -22,14 +22,6 @@ const comboboxCustomCSS = html`
 `
 
 module.exports = (attrs) => {
-  const selectIngredient = (event) => {
-    const ingredientValue = event.target.dataset.value
-    if (ingredientValue) {
-      console.log(ingredientValue)
-      attrs.onAddIngredient(ingredientValue)
-    }
-  }
-
   const ingredientOptions = attrs.ingredients.map(ingredient => html`
     <option value="${ingredient}">
       ${ingredient}
@@ -46,15 +38,25 @@ module.exports = (attrs) => {
   `
 
   // mutates the selectDOM element
-  const comboboxDOM = new Combobox(selectDOM.children[1])
+  const comboboxDOM = new Combobox(selectDOM.querySelector('.autocomplete'))
+  comboboxDOM.chooseOption = function () {
+    const t = document.getElementById(this.input.dataset.selected)
+    this.input.value = t.textContent
+    this.select.value = t.dataset.value
+    this.resultsNotice.textContent = t.textContent + ' selected'
+    this.hideResults()
+    attrs.onAddIngredient(this.select.value)
+  }
 
   return html`
-    <div
-      onclick=${selectIngredient}
-      style=${attrs.style}>
+<<<<<<< Updated upstream
+    <div style=${attrs.style}>
+=======
+    <div>
+>>>>>>> Stashed changes
       ${comboboxCSS}
       ${comboboxCustomCSS}
-      ${selectDOM}
+      ${comboboxDOM.container}
     </div>
   `
 }
