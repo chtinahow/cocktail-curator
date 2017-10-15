@@ -16,7 +16,8 @@ app.get('/filter', async (req, res) => {
   }
   const ingredients = req.query.ingredients.split(',')
   const filteredDrinks = await api.filterDrinksByIngredients(ingredients)
-  res.send(filteredDrinks)
+  const limitFilteredDrinks = filteredDrinks.slice(0, parseInt(req.query.limit, 10) || -1)
+  res.send(limitFilteredDrinks)
 })
 
 app.get('/search/:name', async (req, res) => {

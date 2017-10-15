@@ -17,6 +17,7 @@ const comboboxCustomCSS = html`
       background: #ea8800;
       font-style: inherit;
       font-family: inherit;
+      width: 100%;
     }
   </style>
 `
@@ -30,7 +31,7 @@ module.exports = (attrs) => {
 
   const selectDOM = html`
     <div>
-      <label for="ingredients">Add Ingredients </label>
+      <label for="ingredients"></label>
       <select id="ingredients" class="autocomplete">
         ${ingredientOptions}
       </select>
@@ -39,8 +40,23 @@ module.exports = (attrs) => {
 
   // mutates the selectDOM element
   const comboboxDOM = new Combobox(selectDOM.querySelector('.autocomplete'))
+  comboboxDOM.selectOption = function (t, e) {
+    const s = this
+    console.log(t)
+    window.requestAnimationFrame(function() {
+      s.clearSelected()
+      t.classList.add('autocomplete__result--is-selected')
+      s.input.dataset.selected = t.id
+      t.scrollIntoView(!1)
+      s.resultsNotice.textContent = t.textContent
+      e && e()
+    })
+  }
+
   comboboxDOM.chooseOption = function () {
+    console.log('CALLED')
     const t = document.getElementById(this.input.dataset.selected)
+    console.log(t)
     this.input.value = t.textContent
     this.select.value = t.dataset.value
     this.resultsNotice.textContent = t.textContent + ' selected'
@@ -49,11 +65,7 @@ module.exports = (attrs) => {
   }
 
   return html`
-<<<<<<< Updated upstream
     <div style=${attrs.style}>
-=======
-    <div>
->>>>>>> Stashed changes
       ${comboboxCSS}
       ${comboboxCustomCSS}
       ${comboboxDOM.container}
