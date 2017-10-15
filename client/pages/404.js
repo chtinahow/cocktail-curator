@@ -1,12 +1,21 @@
 const Tram = require('tram-one')
-const html = Tram.html()
+const html = Tram.html({
+  header: require('../elements/header')
+})
+
+const pageStyle = `
+  margin: 1em;
+  text-align: center;
+`
 
 module.exports = () => {
   return html`
     <div>
-      <h1>404</h1>
-      <code>No route ${window.location.pathname}</code><br>
-      Check <code>client/main.js</code> to see all the available routes.
+      <header></header>
+      <div style=${pageStyle}>
+        <h1>404</h1>
+        No Drinks here :(
+      </div>
     </div>
   `
 }
