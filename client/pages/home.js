@@ -22,6 +22,13 @@ const comboStyle = `
 const selectedIngredientsStyle = `
   grid-area: selected-ingredients
 `
+const ingredientStyle = `
+  border: 1px solid #271604;
+  margin: 1rem;
+  border-radius: .5rem;
+  padding: 0.25em 0.75em;
+  cursor: pointer;
+`
 
 const gridStyle = `
   display: grid;
@@ -62,10 +69,11 @@ module.exports = (store, actions) => {
   const ingredients = getOrFetchAllIngredients(store, actions)
   const selectedIngredients = store.selectedIngredientsStore
   const ingredientsDOM = selectedIngredients.map((ingredient) => {
+    const removeIngredient = () => actions.removeIngredient(ingredient)
     return html`
-      <div>
-        ${ingredient}
-      </div>
+      <span onclick=${removeIngredient} style=${ingredientStyle}>
+        ${ingredient} <span style='color:rgba(0,0,0,0.30)'> ✗ </span>
+      </span>
     `
   })
 
