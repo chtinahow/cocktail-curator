@@ -49,7 +49,9 @@ module.exports = (attrs) => {
   const comboboxDOM = new Combobox(selectDOM.children[1])
 
   return html`
-    <div onclick=${selectIngredient}>
+    <div
+      onclick=${selectIngredient}
+      style=${attrs.style}>
       ${comboboxCSS}
       ${comboboxCustomCSS}
       ${selectDOM}

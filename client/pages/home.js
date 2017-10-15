@@ -4,6 +4,32 @@ const html = Tram.html({
   'select-ingredients': require('../elements/select-ingredients')
 })
 
+const buttonStyle = `
+  grid-area: button;
+  border: 1px solid #271604;
+  border-radius: .5rem;
+  font-size: 1em;
+  padding: 0.25em 0.75em;
+  cursor: pointer;
+  margin: 0.75rem;
+  font-family: inherit;
+  background: #e78900;
+`
+const comboStyle =`
+  grid-area: combobox;
+`
+
+const gridStyle =`
+display: grid;
+margin: auto;
+max-width: 80%;
+grid-template-columns: 1fr;
+grid-template-rows: 1fr 1fr;
+grid-template-areas:
+  "combobox"
+  "button";
+overflow: hidden;`
+
 const getOrFetchAllIngredients = (store, actions) => {
   const addIngredient = (ingredient) => {
     actions.addIngredient(ingredient)
@@ -17,6 +43,7 @@ const getOrFetchAllIngredients = (store, actions) => {
     case 'LOADED':
       return html`
         <select-ingredients
+          style=${comboStyle}
           ingredients=${store.ingredientsStore.ingredients}
           onAddIngredient=${addIngredient}>
         </select-ingredients>
@@ -28,10 +55,28 @@ const getOrFetchAllIngredients = (store, actions) => {
 
 module.exports = (store, actions) => {
   const ingredients = getOrFetchAllIngredients(store, actions)
+  const selectedIngredients = store.selectedIngredientsStore
+  const mappedIngredients = selectedIngredients.map(ingredient => {
+    return html`
+      <div>
+        ${ingredient}
+      </div>
+    `
+  })
+
+  const onClickIngredients = () => {
+    window.history.pushState({}, '', `/filter?ingredients=${selectedIngredients}`)
+  }
   return html`
     <div>
       <header></header>
-      ${ingredients}
+      <div style=${gridStyle}>
+        ${ingredients}
+        ${mappedIngredients}
+        <button style=${buttonStyle} onclick=${onClickIngredients}>
+          Search
+        </button>
+      </div>
       <div>
         Thank you for using Tram-One!<br>
         To get started, edit <code>client/pages/home.js</code>.

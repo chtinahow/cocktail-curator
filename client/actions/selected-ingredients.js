@@ -2,6 +2,9 @@ module.exports = {
   init: () => [],
   addIngredient: (ingredients, ingredient) => {
     console.log(ingredients, ingredient)
-    return ingredients.concat(ingredient)
+    if(ingredients.indexOf(ingredient) === -1) {
+      return ingredients.concat(ingredient)
+    }
+    return ingredients
   }
 }
