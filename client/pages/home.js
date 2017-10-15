@@ -5,6 +5,9 @@ const html = Tram.html({
 })
 
 const getOrFetchAllIngredients = (store, actions) => {
+  const addIngredient = (ingredient) => {
+    actions.addIngredient(ingredient)
+  }
   switch (store.ingredientsStore.status) {
     case 'NOT_LOADED':
       actions.fetchAllIngredients()
@@ -13,7 +16,9 @@ const getOrFetchAllIngredients = (store, actions) => {
       return 'loading...'
     case 'LOADED':
       return html`
-        <select-ingredients ingredients=${store.ingredientsStore.ingredients}>
+        <select-ingredients
+          ingredients=${store.ingredientsStore.ingredients}
+          onAddIngredient=${addIngredient}>
         </select-ingredients>
       `
     default:

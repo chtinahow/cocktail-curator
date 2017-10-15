@@ -26,6 +26,7 @@ module.exports = (attrs) => {
     const ingredientValue = event.target.dataset.value
     if (ingredientValue) {
       console.log(ingredientValue)
+      attrs.onAddIngredient(ingredientValue)
     }
   }
 
@@ -43,10 +44,9 @@ module.exports = (attrs) => {
       </select>
     </div>
   `
-  console.log(selectDOM)
 
+  // mutates the selectDOM element
   const comboboxDOM = new Combobox(selectDOM.children[1])
-  console.log(comboboxDOM)
 
   return html`
     <div onclick=${selectIngredient}>
