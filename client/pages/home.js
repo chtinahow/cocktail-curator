@@ -28,6 +28,8 @@ const ingredientStyle = `
   border-radius: .5rem;
   padding: 0.25em 0.75em;
   cursor: pointer;
+  margin: 0.25em;
+  display: inline-block;
 `
 
 const gridStyle = `
