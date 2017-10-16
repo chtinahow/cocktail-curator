@@ -58,6 +58,7 @@ module.exports = (attrs) => {
     background: url(${attrs.image});
     background-attachment: fixed;
     width: 600px;
+    max-width: 100%;
     height: 400px;
     position: relative;
     overflow: hidden;

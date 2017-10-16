@@ -4,13 +4,17 @@ const html = Tram.html()
 const imageStyle = `
   grid-area: image;
   width: 20em;
+  max-width: 100%;
   border-radius: 100%;
     margin: auto;
 `
 
-const ingredientsStyle = `
-  grid-area: ingredients;
-  margin: auto;
+const ingredientStyle = `
+  border: 1px solid #271604;
+  border-radius: .5rem;
+  padding: 0.25em 0.75em;
+  margin: 0.25em;
+  display: inline-block;
 `
 
 const titleStyle = `
@@ -40,9 +44,18 @@ const gridStyle = `
 module.exports = (attrs) => {
   const ingredientsDOM = attrs.ingredients.map((ingredient) => {
     return html`
-      <li>${ingredient.measure} : ${ingredient.name}</li>
+      <span style=${ingredientStyle}>
+        ${ingredient.measure} : ${ingredient.name}
+      </span>
     `
   })
+
+  const ingredientsStyle = `
+    grid-area: ingredients;
+    max-width: 80%;
+    margin: auto;
+  `
+
   return html`
     <div style=${gridStyle}>
       <img src=${attrs.image} style=${imageStyle}/>
