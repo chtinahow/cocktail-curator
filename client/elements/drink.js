@@ -3,7 +3,9 @@ const html = Tram.html()
 
 const imageStyle = `
   grid-area: image;
-  width: 100%;
+  width: 15em;
+  border-radius: 100%;
+    margin: auto;
 `
 
 const ingredientsStyle = `
@@ -21,19 +23,17 @@ const instructionsStyle = `
   grid-area: instructions;
   text-align: justify;
   align-self: end;
+  margin: auto;
 `
 
 const gridStyle = `
   display: grid;
-  grid-template-columns: 49% 49%;
-  grid-column-gap: 2%;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: auto auto auto auto;
   grid-template-areas:
-    "image title"
-    "image ingredients"
-    "image instructions";
-  height: 80%;
-  overflow: hidden;
+    "title"
+    "image"
+    "ingredients"
+    "instructions";
 `
 
 module.exports = (attrs) => {
