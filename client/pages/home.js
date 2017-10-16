@@ -36,6 +36,7 @@ const gridStyle = `
   max-width: 80%;
   grid-template-columns: 1fr;
   grid-template-rows: auto auto auto;
+  grid-row-gap: 1em;
   grid-template-areas:
     "combobox"
     "selected-ingredients"

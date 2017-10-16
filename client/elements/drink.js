@@ -3,7 +3,7 @@ const html = Tram.html()
 
 const imageStyle = `
   grid-area: image;
-  width: 15em;
+  width: 20em;
   border-radius: 100%;
     margin: auto;
 `
@@ -29,6 +29,7 @@ const instructionsStyle = `
 const gridStyle = `
   display: grid;
   grid-template-rows: auto auto auto auto;
+  grid-row-gap: 2em;
   grid-template-areas:
     "title"
     "image"
