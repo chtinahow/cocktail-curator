@@ -14,7 +14,7 @@ module.exports = () => {
       <header></header>
       <div style=${pageStyle}>
         <h1>404</h1>
-        No Drinks here :(
+        <img src="/404.gif" />
       </div>
     </div>
   `
