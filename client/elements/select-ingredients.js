@@ -19,6 +19,23 @@ const comboboxCustomCSS = html`
       font-family: inherit;
       width: 100%;
     }
+
+    ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+      color: #58422b;
+      text-align: center;
+    }
+    ::-moz-placeholder { /* Firefox 19+ */
+      color: #58422b;
+      text-align: center;
+    }
+    :-ms-input-placeholder { /* IE 10+ */
+      color: #58422b;
+      text-align: center;
+    }
+    :-moz-placeholder { /* Firefox 18- */
+      color: #58422b;
+      text-align: center;
+    }
   </style>
 `
 
@@ -40,6 +57,7 @@ module.exports = (attrs) => {
 
   // mutates the selectDOM element
   const comboboxDOM = new Combobox(selectDOM.querySelector('.autocomplete'))
+  comboboxDOM.input.setAttribute('placeholder', 'Add Ingredients to Search')
   comboboxDOM.selectOption = function (t, e) {
     const s = this
     console.log(t)

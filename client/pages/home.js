@@ -69,7 +69,7 @@ const getOrFetchAllIngredients = (store, actions) => {
 }
 
 module.exports = (store, actions) => {
-  const ingredients = getOrFetchAllIngredients(store, actions)
+  const searchIngredients = getOrFetchAllIngredients(store, actions)
   const selectedIngredients = store.selectedIngredientsStore
   const ingredientsDOM = selectedIngredients.map((ingredient) => {
     const removeIngredient = () => actions.removeIngredient(ingredient)
@@ -87,7 +87,7 @@ module.exports = (store, actions) => {
     <div>
       <header></header>
       <div style=${gridStyle}>
-        ${ingredients}
+        ${searchIngredients}
         <div style=${selectedIngredientsStyle}>
           ${ingredientsDOM}
         </div>
