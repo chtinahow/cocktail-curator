@@ -15,6 +15,14 @@ const buttonStyle = `
   font-family: inherit;
   background: #e78900;
 `
+
+const disabledButtonStyle = `
+  ${buttonStyle}
+  color: #58422b;
+  border: 1px solid #58422b;
+  cursor: default;
+`
+
 const comboStyle = `
   grid-area: combobox;
 `
@@ -83,6 +91,10 @@ module.exports = (store, actions) => {
   const onClickIngredients = () => {
     window.history.pushState({}, '', `/filter?ingredients=${selectedIngredients}&limit=30`)
   }
+
+  const seachButtonStyle = selectedIngredients.length === 0 ? disabledButtonStyle : buttonStyle
+  const searchButtonAction = selectedIngredients.length === 0 ? () => {} : onClickIngredients
+
   return html`
     <div>
       <header></header>
@@ -91,7 +103,7 @@ module.exports = (store, actions) => {
         <div style=${selectedIngredientsStyle}>
           ${ingredientsDOM}
         </div>
-        <button style=${buttonStyle} onclick=${onClickIngredients}>
+        <button style=${seachButtonStyle} onclick=${searchButtonAction}>
           Search
         </button>
       </div>

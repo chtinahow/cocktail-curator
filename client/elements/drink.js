@@ -3,10 +3,10 @@ const html = Tram.html()
 
 const imageStyle = `
   grid-area: image;
-  width: 20em;
+  width: 600px;
   max-width: 100%;
-  border-radius: 100%;
-    margin: auto;
+  border-radius: 3rem;
+  margin: auto;
 `
 
 const ingredientStyle = `
@@ -20,7 +20,7 @@ const ingredientStyle = `
 const titleStyle = `
   grid-area: title;
   text-align: center;
-  margin-top: 0px;
+  margin: 0px;
 `
 
 const instructionsStyle = `
@@ -43,9 +43,10 @@ const gridStyle = `
 
 module.exports = (attrs) => {
   const ingredientsDOM = attrs.ingredients.map((ingredient) => {
+    const ingredientLabel = ingredient.measure === '' ? ingredient.name : `${ingredient.measure} : ${ingredient.name}`
     return html`
       <span style=${ingredientStyle}>
-        ${ingredient.measure} : ${ingredient.name}
+        ${ingredientLabel}
       </span>
     `
   })
