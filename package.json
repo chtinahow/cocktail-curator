@@ -9,8 +9,6 @@
     "lint": "xo",
     "prebuild:client": "cp -r ./client/public/ ./dist",
     "build:client": "browserify ./client/main.js -o ./dist/bundle.js -t [ babelify --presets [ env ] ]",
-    "predeploy": "npm run build:client",
-    "deploy": "gh-pages -d dist -b gh-pages",
     "test": "jasmine ./client/specs/specs.js"
   },
   "repository": {
