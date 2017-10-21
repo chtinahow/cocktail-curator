@@ -5,7 +5,7 @@ module.exports = {
       ingredients.join(',') :
       ingredients
     const limit = window.location.href.match(/limit=(\d+)/)[1]
-    fetch(`http://174.138.61.188:3000/filter?ingredients=${ingredientsCSV}&limit=${limit}`)
+    fetch(`http://174.138.61.188/filter?ingredients=${ingredientsCSV}&limit=${limit}`)
       .then(data => data.json())
       .then((data) => {
         actions.setDrinks(data)
