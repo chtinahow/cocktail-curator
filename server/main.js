@@ -42,6 +42,6 @@ app.get('/randomDrink', async (req, res) => {
   res.send(drink)
 })
 
-app.listen(80, () => {
-  console.log('Cocktail Curator runnning on port 80!')
+app.listen(4696, () => {
+  console.log('Cocktail Curator runnning on port 4696!')
 })
