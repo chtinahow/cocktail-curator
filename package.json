@@ -7,8 +7,10 @@
     "start:server": "node server/main.js",
     "start:client": "budo ./client/main.js:bundle.js --pushstate --dir ./client/public --live",
     "lint": "xo",
-    "prebuild": "cp -r ./client/public/ ./dist",
-    "build": "browserify ./client/main.js -o ./dist/bundle.js -t [ babelify --presets [ env ] ]",
+    "prebuild:client": "cp -r ./client/public/ ./dist",
+    "build:client": "browserify ./client/main.js -o ./dist/bundle.js -t [ babelify --presets [ env ] ]",
+    "predeploy": "npm run build:client",
+    "deploy": "gh-pages -d dist -b gh-pages",
     "test": "jasmine ./client/specs/specs.js"
   },
   "repository": {
@@ -30,7 +32,9 @@
     "budo": "^10.0.4",
     "combobox-node": "^2.0.0",
     "cors": "^2.8.4",
+    "eslint-config-tram-one": "^1.1.0",
     "express": "^4.15.4",
+    "gh-pages": "^1.0.0",
     "hover-engine": "^1.2.0",
     "jasmine": "^2.8.0",
     "node-fetch": "^1.7.3",
