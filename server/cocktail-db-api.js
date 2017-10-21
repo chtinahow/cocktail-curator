@@ -10,7 +10,7 @@ const buildIngredientArray = (drink) => {
     .map((ingredientIndex) => {
       return {
         name: drink[`strIngredient${ingredientIndex}`],
-        measure: drink[`strMeasure${ingredientIndex}`]
+        measure: drink[`strMeasure${ingredientIndex}`].trim()
       }
     })
 }
