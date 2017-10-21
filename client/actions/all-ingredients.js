@@ -1,7 +1,7 @@
 module.exports = {
   init: () => Object({ingredients: null, status: 'NOT_LOADED'}),
   fetchAllIngredients: (state, _, actions) => {
-    fetch(`http://localhost:3000/allIngredients`)
+    fetch(`http://174.138.61.188:3000/allIngredients`)
       .then(data => data.json())
       .then((data) => {
         actions.setAllIngredients(data)
