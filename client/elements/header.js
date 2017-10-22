@@ -6,6 +6,7 @@ const headerStyle = `
   background: #b25a00;
   padding: 0.8rem;
   margin-top: 0px;
+  font-size: 1.75em;
 `
 
 const imageStyle = `
