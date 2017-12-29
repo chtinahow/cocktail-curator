@@ -65,6 +65,7 @@ module.exports = (attrs) => {
     margin: 20px auto;
     background-position: center;
     border-radius: 3rem;
+    cursor: pointer;
   `
 
   return html`
